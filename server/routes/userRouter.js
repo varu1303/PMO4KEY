@@ -445,6 +445,17 @@ const isAdmin = (req,res,next) => {
         })
     });
     
+    app.get('/admin/countAssociate', isLoggedIn, isAdmin, function(req,res) {
+        
+        User._getCount()
+            .then(function(data) {
+                res.json(genResponse(data,null))
+        })
+            .catch(function(error) {
+            res.status(500).json(genResponse(null,'ERROR IN GETTING DATA FROM DATABASE'));
+        })
+    });
+    
 //END OF SIX REPORTS
     
     app.put('/admin/makeadmin', isLoggedIn, isAdmin, function(req,res) {

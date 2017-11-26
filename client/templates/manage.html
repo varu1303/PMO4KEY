@@ -8,6 +8,11 @@
                 </form>
                 <button class="btn btn-default btn-manage" data-toggle="modal" data-target="#userProfile" ng-click="Manage.findUser()">Search</button>
             </div>
+            
+            <div class="alert alert-success" ng-show="Manage.countSuccess">
+                <strong>{{Manage.associateCount}} Associates registered in KEY DB!</strong>
+            </div>            
+            
         </div>
         
         <!-- Modal -->

@@ -74,6 +74,12 @@ function httpService($http, tokenService) {
             });
     }
     
+    this._getTotalAssociate = function () {
+        return $http.get('/admin/countAssociate',{
+                                        headers: {Authorization: 'Bearer '+ tokenService.getToken()}
+            });
+    }
+    
     this._deleteUser = function (empId) {
         return $http.delete('/admin/deleteUser/'+ empId,{
                                         headers: {Authorization: 'Bearer '+ tokenService.getToken()}

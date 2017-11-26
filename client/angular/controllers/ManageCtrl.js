@@ -36,8 +36,23 @@ function ManageController($rootScope, tokenService, httpService, $scope, $timeou
     mc.deleted = false;
     mc.adminError = false;
     mc.deleteError = false;
+    mc.associateCount = 0;
     
     mc.makeSure = false;
+    mc.countSuccess = false;
+    
+    mc.totalAssociate = function () {
+        httpService._getTotalAssociate()
+            .then(function(data){
+                mc.associateCount = data.data.data;
+                mc.countSuccess = true;
+        })
+            .catch(function(error){
+                console.log(error);
+        })
+    }
+    
+    mc.totalAssociate();
     
     mc.findUser = function() {
         mc.findAttempt = true;

@@ -88,6 +88,10 @@ module.exports = {
         return User.find({manComp: false});
     },
     
+    _getCount: () => {
+        return User.count({});
+    },
+    
     _makeAdmin: empId => {
         return User.findOneAndUpdate({empId: empId}, {$set: {admin: true}}, {new: true});
     },
