@@ -1,0 +1,129 @@
+<div class="container">
+    <div class="jumbotron pro">
+        <h2>UNLOCK POSSIBILITIES!</h2>
+        <br>
+        <p>Read more about <a href="https://www.key.com/about/index.jsp" target="_blank">KEY</a></p>
+    </div>  
+        <br>
+     <div class="jumbotron pro">  
+        <h3>MANDATORY LEARNINGS  | {{ Profile.manComp ? 'COMPLETE' : 'PENDING' }}</h3>
+        <div class="alert alert-success" ng-show="Profile.compSession">
+            <strong><em>GOOD JOB! You completed the mandatory learnings.</em></strong>
+        </div>
+
+        <br>
+        
+        <p><a href="#" target="_blank" ng-click="Profile.checkManComp({number : 'link1'})">BFS L0</a></p>
+        <p><a href="#" target="_blank" ng-click="Profile.checkManComp({number : 'link2'})">Consumer Lending</a></p>
+        <p><a href="#" target="_blank" ng-click="Profile.checkManComp({number : 'link3'})">Do's and Dont's</a></p>
+    </div>        
+        <br>
+    <div class="jumbotron pro">
+        <h3>Your Profile</h3>
+        <p id="edit"><span  data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span> | <span  data-toggle="modal" data-target="#myPassword"> <i class="fa fa-unlock" aria-hidden="true"></i></span></p>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">EDIT YOUR PROFILE</h4>
+              </div>
+              <div class="modal-body">
+                <input type="emailId" ng-model="Profile.newEmail" class="inp"><br>
+                <input type="tel" ng-model="Profile.newNumber" class="inp"><br>
+                <input type="text" ng-model="Profile.newccaRole" class="inp"><br>
+                <div class="form-group  inp-hold">
+                    VISA TYPE:
+                    <select name="visa" ng-model="Profile.newVisa.visaType" ng-change="Profile.resetExpiry()">
+                      <option value="NA">NA</option>
+                      <option value="H1">H1</option>
+                      <option value="L1">L1</option>
+                      <option value="B1">B1</option>
+                    </select>
+                </div>
+                <div class="form-group inp-hold">
+                    VISA EXPIRY:
+                    <input type="date" name="visaexp" id="visaexp" tabindex="1" class="form-control" placeholder="VISA Expiry" value="" ng-model="Profile.newVisa.expiryDate" ng-disabled="Profile.newVisa.visaType == 'NA'">
+                </div>
+                <div class="alert alert-warning" ng-show="!Profile.updated && Profile.updateAttempt">
+                    <strong>{{Profile.updateMessage}}</strong>
+                </div>
+                <div class="alert alert-success" ng-show="Profile.updated && Profile.updateAttempt">
+                    <strong>UPDATED!</strong>
+                </div>
+              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="Profile.updUserPublicDetails()">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-disabled="Profile.updating" ng-click="Profile.resetModal()">Close</button>
+                </div>
+            </div>
+
+
+
+          </div>
+        </div>
+        <!-- CHANGE PASSWORD content-->
+        <div id="myPassword" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">CHANGE PASSWORD</h4>
+              </div>
+              <div class="modal-body">
+                <form id="change-form" name="changeForm" role="form">
+                    <div class="form-group">
+                        ENTER NEW PASSWORD:
+                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="New Password"  ng-model="Profile.newPassword" ng-minlength="6" ng-maxlength="10">
+                    </div>
+                    <div class="alert alert-warning" ng-show="changeForm.password.$error.minlength || changeForm.password.$error.maxlength">
+                        <strong>PASSWORDS SHOULD BE BETWEEN 6 and 10 CHARACTERS!</strong>
+                    </div>
+                    <div class="form-group">
+                        CONFIRM PASSWORD:
+                        <input type="password" name="conpassword" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm New Password"  ng-model="Profile.conNewPassword">
+                    </div>
+                    <div class="alert alert-warning" ng-show="Profile.conNewPassword.length > 0 && Profile.conNewPassword != Profile.newPassword">
+                        <strong>PASSWORDS DO NOT MATCH!</strong>
+                    </div>
+                    <div class="alert alert-warning" ng-show="!Profile.changed && Profile.changeAttempt">
+                        <strong>{{Profile.changeMessage}}</strong>
+                    </div>
+                    <div class="alert alert-success" ng-show="Profile.changed && Profile.changeAttempt">
+                        <strong>PASSWORD CHANGED!</strong>
+                    </div>
+                </form>
+              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="Profile.changePassword()">Change</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-disabled="Profile.changing" ng-click="Profile.resetPasswordModal()">Close</button>
+                </div>
+
+            </div>
+
+
+
+          </div>
+        </div>
+        <br>
+
+        <p><strong>{{Profile.name}} </strong>joined CTS on {{Profile.ctsDOJ |  date:'mediumDate'}} and has {{Math.floor(Profile.totExp/12) == 0 ? 'Less than one year' : Math.floor(Profile.totExp/12) + '+ years'}} of IT experience.</p>
+
+        <p><strong> EMPLOYEE ID      : </strong>{{Profile.empId}} </p>
+        <p><strong> CURRENT CCA ROLE : </strong>{{Profile.ccaRole}} </p>
+        <p><strong> CONTACT DETAILS  : </strong>{{Profile.phoneNumber}} | {{Profile.emailId}}</p>
+        <p><strong> VISA             : </strong>{{Profile.Visa.type == 'NA' ? 'NA' : Profile.Visa.type }}  
+                               {{Profile.Visa.type == 'NA' ? '' : 'expires on' }}
+                               {{Profile.Visa.type == 'NA' ? '' : Profile.Visa.expiryDate |  date:'mediumDate'}}</p>
+
+
+<!--
+        <div class="text-center">
+            <span>Forgot Password</span>
+        </div>
+-->
+    </div>
+</div>

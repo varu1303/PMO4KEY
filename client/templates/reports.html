@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="jumbotron">
+        <h3 ng-show="!Report.Authorised">You're not Authorised</h3>
+        <h3 ng-show="Report.Authorised">{{Report.description}}</h3>
+    </div> 
+    
+    <div class="alert alert-warning"  ng-show="Report.reportError">
+        <strong>Error in getting report! Try Later.</strong>
+    </div>
+    
+    <div class="alert alert-warning"  ng-show="Report.displayArray.length == 0">
+        <strong>NO SUCH ASSOCIATES!</strong>
+    </div>
+    
+    <div class="alert alert-success"  ng-show="Report.displayArray.length > 0">
+        <strong>{{Report.displayArray.length}} SUCH {{Report.displayArray.length > 1 ? 'ASSOCIATES!' : 'ASSOCIATE!'}}</strong>
+    </div>
+    
+    <div style="text-align: center;">
+        <button class="btn btn-default btn-lg" ng-show="Report.checkType() && !Report.reportError && Report.displayArray.length > 0" ng-click="Report.accumEmp(Report.displayArray)">UPDATE TO YES</button>
+    </div>
+    
+    <div class="alert alert-warning repUpd" ng-show="Report.noSelection">
+        <strong>NO ASSOCIATES SELECTED!</strong>
+    </div>
+    <div class="alert alert-success repUpd" ng-show="Report.bulkDoing">
+        <strong>UPDATING! Please wait for updated report..</strong>
+    </div>
+    <div class="alert alert-warning repUpd" ng-show="Report.bulkError">
+        <strong>ERROR! Try later..</strong>
+    </div>
+    
+    {{Report.bulk}}
+    
+    <table class="table table-striped" ng-show="!Report.reportError && Report.displayArray.length > 0">
+        <thead>
+            <tr>
+              <th scope="col">Emp ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Phone#</th>
+              <th scope="col" class="hidden-sm hidden-xs">CCA Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="emp in Report.displayArray">
+              <th scope="row"><input type="checkbox" id="checkbox-1-1" ng-show="Report.checkType()" ng-model="emp.SELECTED"  ng-true-value="'Y'" ng-false-value="'N'">{{emp.empId}} </th>
+              <td>{{emp.name}}</td>
+              <td>{{emp.phoneNumber}}</td>
+              <td class="hidden-sm hidden-xs">{{emp.ccaRole}}</td>
+<!--              <td><input type="checkbox" id="checkbox-1-1" ></td>-->
+              <td><a href="mailto:{{emp.emailId}}"><i class="fa fa-envelope" aria-hidden="true"></i></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,18 @@
+<div class=".container">
+    <div class="jumbotron forgot">
+        <h3>ENTER YOUR EMPLOYEE ID</h3>
+        <br>
+        <input type="text" placeholder="Employee ID" ng-model="Forgot.empId">
+        <button ng-click="Forgot.sendMail()">SUBMIT</button>
+        <p style="padding: 8px; margin-top: 25px;"><a href="/"><i class="fa fa-2x fa-arrow-circle-left" aria-hidden="true"></i></a></p>
+    </div>
+
+    <div class="alert alert-warning" ng-show="!Forgot.mailSent && Forgot.mailAttempt" style="text-align: center;">
+        <strong>{{Forgot.errorMail}}</strong>
+    </div>
+    <div class="alert alert-success" ng-show="Forgot.mailSent && Forgot.mailAttempt" style="text-align: center;">
+        <strong>Time to dig out password from - {{Forgot.empEmail}}</strong>
+    </div>
+    
+
+</div>

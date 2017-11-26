@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="jumbotron">
+        <div class="alert alert-success wrapToday" >
+            <strong>TODAY | {{Feed.today | date: 'mediumDate'}} ({{Feed.todayList.length}})</strong>
+        </div>
+        <p ng-repeat="act in Feed.todayList" class="feedlist feedtoday"><i class="fa fa-asterisk" aria-hidden="true"></i>
+<strong>{{act.byName}}({{act.byempId}})</strong> {{act.activity}}</p>
+    </div>
+    <br>
+    <div class="jumbotron">
+        <div class="alert alert-success wrapYester">
+            <strong>YESTERDAY | {{Feed.yesterday | date: 'mediumDate'}}  ({{Feed.yesterdayList.length}})</strong>
+        </div>
+        <p ng-repeat="act in Feed.yesterdayList" class="feedlist feedyester"><i class="fa fa-asterisk" aria-hidden="true"></i>
+<strong>{{act.byName}}({{act.byempId}})</strong> {{act.activity}}</p>
+    </div>
+    <br>
+    <div class="jumbotron">
+        <div class="alert alert-success wrapWeek">
+            <strong>PREVIOUS WEEK | {{Feed.lastweek | date: 'mediumDate'}}  ({{Feed.lastweekList.length}})</strong>
+        </div>
+        <p ng-repeat="act in Feed.lastweekList" class="feedlist feedweek"><i class="fa fa-asterisk" aria-hidden="true"></i>
+<strong>{{act.byName}}({{act.byempId}})</strong> {{act.activity}}</p>
+    </div>
+    <br>
+    <div class="jumbotron">
+        <div class="alert alert-success wrapMonth">
+            <strong>PREVIOUS MONTH | {{Feed.lastmonth | date: 'mediumDate'}}  ({{Feed.lastmonthList.length}})</strong>
+        </div>
+        <p ng-repeat="act in Feed.lastmonthList" class="feedlist feedmonth"><i class="fa fa-asterisk" aria-hidden="true"></i>
+<strong>{{act.byName}}({{act.byempId}})</strong> {{act.activity}}</p>
+    </div>
+</div> 

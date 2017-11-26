@@ -1,0 +1,251 @@
+/*To get ng-cloak working!*/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+/*Angular views */
+.view-animate.ng-enter {
+  transition:0.3s ease-in all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.view-animate.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+
+/*Universal*/
+html {
+  box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+
+
+.panel-login {
+	border-color: #ccc;
+	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+.panel-login>.panel-heading {
+	color: #00415d;
+	background-color: #fff;
+	border-color: #fff;
+	text-align:center;
+}
+.panel-login>.panel-heading a{
+	text-decoration: none;
+	color: #666;
+	font-weight: bold;
+	font-size: 15px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+.panel-login>.panel-heading a.active{
+	color: #029f5b;
+	font-size: 18px;
+}
+.panel-login>.panel-heading hr{
+	margin-top: 10px;
+	margin-bottom: 0px;
+	clear: both;
+	border: 0;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+	background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+	height: 45px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+.panel-login input:hover,
+.panel-login input:focus {
+	outline:none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border-color: #ccc;
+}
+.btn-login {
+	background-color: #59B2E0;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #59B2E6;
+}
+.btn-login:hover,
+.btn-login:focus {
+	color: #fff;
+	background-color: #53A3CD;
+	border-color: #53A3CD;
+}
+.forgot-password {
+	text-decoration: underline;
+	color: #888;
+}
+.forgot-password:hover,
+.forgot-password:focus {
+	text-decoration: underline;
+	color: #666;
+}
+
+.btn-register {
+	background-color: #1CB94E;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #1CB94A;
+}
+.btn-register:hover,
+.btn-register:focus {
+	color: #fff;
+	background-color: #1CA347;
+	border-color: #1CA347;
+}
+
+
+/*LOGOUT*/
+
+.outbox {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.outmid {
+    margin: auto;
+}
+
+.forgot {
+    text-align: center;
+}
+
+.pro h1,.pro h2,.pro h3{
+    text-align: center;
+    margin-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+.pro p {
+    padding: 3px;
+}
+
+#edit {
+    text-align: right;
+}
+
+.inp {
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+
+.inp-hold {
+    text-align: center;
+}
+
+.feedlist {
+    padding: 5px;
+    border-bottom: 1px solid grey;
+}
+
+/*MANAGE SEARCH*/
+.manage[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    padding: 5px;
+    width: 50%;
+
+}
+
+.btn-manage {
+    margin: 5px;
+}
+
+.manage-head {
+    text-align: center;
+    padding: 5px;
+    border-bottom: 2px solid black;
+}
+
+.manage-matrix{
+    text-align: center;
+}
+
+.make50 {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.sure {
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+}
+
+.report {
+    text-align: center;
+}
+
+.report p {
+    text-align: left;
+}
+
+input[type=checkbox] {
+    transform: scale(1.3);
+    padding: 2px;
+    margin-right: 2px;
+}
+
+.repUpd {
+    margin-top: 5px;
+}
+
+
+@media only screen and (max-width : 767px) {
+    
+    p {
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+
+
+
+

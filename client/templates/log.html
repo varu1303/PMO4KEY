@@ -1,0 +1,150 @@
+<div class="container">
+    	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#" class="active" id="login-form-link">Login</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" id="register-form-link">Register</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+
+								<form id="login-form" name="loginForm" role="form" style="display: block;">
+									<div class="form-group">
+										<input type="text" name="empId" id="username" tabindex="1" class="form-control" placeholder="Employee ID" value="" required ng-model="Log.userCredential.empId">
+									</div>
+									<div class="form-group">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required ng-model="Log.userCredential.password">
+									</div>
+<!--
+									<div class="form-group text-center">
+										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+										<label for="remember"> I'm an Admin</label>
+									</div>
+-->
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In" ng-click="Log.loginUser()">
+											</div>
+										</div>
+									</div>
+                                    <div class="alert alert-warning" ng-show="!Log.login && Log.loginAttempt">
+                                        <strong>{{Log.errorInLogin}}</strong>
+                                    </div>
+                                    <div class="alert alert-success" ng-show="Log.logged">
+                                        <strong>LOGGED IN!</strong>
+                                    </div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<a href="/forgotpassword" tabindex="5" class="forgot-password">Forgot Password?</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+                                
+								<form id="register-form" name="registerForm" role="form" style="display: none;">
+                                    <div class="alert alert-info">
+                                        <strong>ALL FIELDS ARE MANDATORY!</strong>
+                                    </div>
+									<div class="form-group">
+                                        ENTER YOUR EMPLOYEE ID:
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Employee ID" value="" ng-model="Log.userDetails.empId" required>
+									</div>
+                                    <div class="form-group">
+                                        ENTER YOUR NAME:
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Name" value="" ng-model="Log.userDetails.name" required>
+									</div>
+									<div class="form-group">
+                                        ENTER YOUR E-MAIL ADDRESS:
+										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="" ng-model="Log.userDetails.emailId" required>
+									</div>
+                                    <div class="alert alert-warning" ng-show="registerForm.email.$invalid && !registerForm.email.$pristine">
+                                        <strong>NOT A VALID E-Mail!</strong>
+                                    </div>
+									<div class="form-group">
+                                        ENTER YOUR CCA ROLE:
+										<input type="text" name="cca" id="cca" tabindex="1" class="form-control" placeholder="CCA Role" value="" ng-model="Log.userDetails.ccaRole" required>
+									</div>									
+                                    <div class="form-group">
+                                        ENTER YOUR MOBILE NUMBER:
+								        <input type="tel" name="phoneno" id="phoneno" tabindex="1" class="form-control"      placeholder="Phone Number" value=""  ng-model="Log.userDetails.phoneNumber" required ng-minlength="10" ng-maxlength="10">
+									</div>
+                                    <div class="alert alert-warning" ng-show="registerForm.phoneno.$error.minlength || registerForm.phoneno.$error.maxlength">
+                                        <strong>PLEASE ENTER A VALID 10 DIGIT PHONE NUMBER!</strong>
+                                    </div>
+                                    <div class="form-group">
+                                        ENTER CTS JOINING DATE:
+								        <input type="date" name="ctsjoin" id="ctsjoin" tabindex="1" class="form-control"      placeholder="CTS Join Date" value=""  ng-model="Log.userDetails.ctsDOJ" required>
+                                    </div>
+                                    <div class="form-group">
+                                        ENTER KEY JOINING DATE:
+								        <input type="date" name="keyjoin" id="keyjoin" tabindex="1" class="form-control"      placeholder="KEY Join Date" value=""  ng-model="Log.userDetails.keyDOJ" required>
+                                    </div>
+                                    <div class="form-group">
+                                        ENTER YOUR TOTAL EXPERIENCE BEFORE JOINING CTS(in months):
+								        <input type="number" name="expb4" id="expb4" tabindex="1" class="form-control"      placeholder="Experience before CTS in months" value=""  ng-model="Log.userDetails.expb4CTS" required>
+                                    </div>
+                                    <div class="form-group">
+                                        SELECT VISA TYPE:
+                                        <select name="visa" ng-model="Log.userDetails.Visa.visaType" ng-change="Log.clearExpiryifNA()">
+                                          <option value="NA">NA</option>
+                                          <option value="H1">H1</option>
+                                          <option value="L1">L1</option>
+                                          <option value="B1">B1</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        VISA EXPIRY:
+								        <input type="date" name="visaexp" id="visaexp" tabindex="1" class="form-control"      placeholder="VISA Expiry" value="" ng-model="Log.userDetails.Visa.expiryDate" ng-disabled="Log.userDetails.Visa.visaType == 'NA'">
+                                    </div>
+									<div class="form-group">
+                                        ENTER PASSWORD:
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"  ng-model="Log.userDetails.password" ng-minlength="6" ng-maxlength="10">
+									</div>
+                                    <div class="alert alert-warning" ng-show="registerForm.password.$error.minlength || registerForm.password.$error.maxlength">
+                                        <strong>PASSWORDS SHOULD BE BETWEEN 6 and 10 CHARACTERS!</strong>
+                                    </div>
+									<div class="form-group">
+                                        CONFIRM PASSWORD:
+										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password"  ng-model="Log.userDetails.conpassword">
+									</div>
+                                    <div class="alert alert-warning" ng-show="Log.userDetails.conpassword.length > 0 && Log.userDetails.conpassword != Log.userDetails.password">
+                                        <strong>PASSWORDS DO NOT MATCH!</strong>
+                                    </div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now" 
+                                                       ng-click="Log.registerUser(registerForm.$invalid)">
+											</div>
+										</div>
+									</div>
+                                    <div class="alert alert-warning" ng-show="Log.cantRegister">
+                                        <strong>INVALID FORM!</strong>
+                                    </div>
+                                    <div class="alert alert-success" ng-show="Log.registered">
+                                        <strong>REGISTERED!</strong>
+                                    </div>
+                                    <div class="alert alert-warning" ng-show="!Log.registered && Log.registerAttempt">
+                                        <strong>{{Log.errorInRegister}}</strong>
+                                    </div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

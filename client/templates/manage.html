@@ -1,0 +1,152 @@
+<div class="container">
+    <div class="jumbotron">
+        <div class="row" style="text-align: center;">
+            <h2>Search any Associate in KEY</h2>
+            <div class="search" style="text-align: center;">
+                <form>
+                    <input type="text" name="search" class="manage" placeholder="Employee ID..." ng-model="Manage.searchempId">
+                </form>
+                <button class="btn btn-default btn-manage" data-toggle="modal" data-target="#userProfile" ng-click="Manage.findUser()">Search</button>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div id="userProfile" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ASSOCIATE : {{Manage.searchempId}}</h4>
+              </div>
+              <div class="modal-body">
+                <div class="alert alert-warning" ng-show="!Manage.found && Manage.findAttempt">
+                    <strong>{{Manage.findStatus}}</strong>
+                </div>
+                <div ng-show="Manage.found && Manage.findAttempt">
+                    <p>{{Manage.associate.name}} joined CTS on {{Manage.associate.ctsDOJ |  date:'mediumDate'}} and has total {{Math.floor(Manage.associate.totExp/12) == 0 ? 'Less than one year' : Math.floor(Manage.associate.totExp/12) + '+ years'}} of IT experience.</p>
+                    
+                    
+                    <p>Current CCA Role: {{Manage.associate.ccaRole}}</p>
+                    <p>Mandatory e-learnings are <span ng-show="Manage.associate.manComp">COMPLETE</span> <span ng-show="!Manage.associate.manComp">INCOMPLETE</span>.</p>
+                    
+                    <p class="manage-head">CONTACT DETAILS</p>
+                    <p>E-mail Id: {{Manage.associate.emailId}}</p>
+                    <p>Phone #: {{Manage.associate.phoneNumber}}</p>
+                    
+                    <p class="manage-head">VISA</p>
+                    <p ng-show="Manage.associate.Visa.typ != 'NA'">{{Manage.associate.Visa.typ}} expires on {{Manage.associate.Visa.expiryDate | date: 'mediumDate'}}</p>
+                    <p ng-show="Manage.associate.Visa.typ == 'NA'">NA</p>
+                    
+                    <p class="manage-head">KEY MATRIX</p>
+                    <div class="form-group manage-matrix">
+                        <input type="text" placeholder="Project ID" ng-model="Manage.associate.projectId">
+                    </div>
+                    <div class="form-group manage-matrix">
+                        <input type="text" placeholder="Project Name" ng-model="Manage.associate.projectName">
+                    </div>
+                    <div class="form-group manage-matrix">
+                    <button class="btn btn-primary" ng-click="Manage.updateProject()">Update Project Details</button>
+                    </div>
+                    <div class="alert alert-warning" ng-show="!Manage.projectUpdated && Manage.projectUpdateAttempt">
+                        <strong>{{Manage.projectUpdateMessage}}</strong>
+                    </div>
+                    <div class="alert alert-success" ng-show="Manage.projectUpdated && Manage.projectUpdateAttempt">
+                        <strong>PROJECT DETAILS UPDATED!</strong>
+                    </div>
+                    <div class="form-group manage-matrix">
+                        Has NDA been Signed?
+                        <select name="NDA" ng-model="Manage.associate.NDASign" ng-change="Manage.updateNDA()">
+                          <option value="true">YES</option>
+                          <option value="false">NO</option>
+                        </select>
+                        <div class="alert alert-warning" ng-show="Manage.NDAerror">
+                            <strong>Error! Try Later.</strong>
+                        </div>
+                        <div class="alert alert-success" ng-show="Manage.NDAupdated">
+                            <strong>NDA signature's status UPDATED!</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group manage-matrix">
+                        Has BMS been requested?
+                        <select name="BMS" ng-model="Manage.associate.BMSreq" ng-change="Manage.updateBMS()">
+                          <option value="true">YES</option>
+                          <option value="false">NO</option>
+                        </select>
+                        <div class="alert alert-warning" ng-show="Manage.BMSerror">
+                            <strong>Error! Try Later.</strong>
+                        </div>
+                        <div class="alert alert-success" ng-show="Manage.BMSupdated">
+                            <strong>BMS request's status UPDATED!</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group manage-matrix">
+                        Has taken drug test?
+                        <select name="Drug" ng-model="Manage.associate.drugTest" ng-change="Manage.updateDrug()">
+                          <option value="true">YES</option>
+                          <option value="false">NO</option>
+                        </select>
+                        <div class="alert alert-warning" ng-show="Manage.Drugerror">
+                            <strong>Error! Try Later.</strong>
+                        </div>
+                        <div class="alert alert-success" ng-show="Manage.Drugupdated">
+                            <strong>Drug Test's status UPDATED!</strong>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="modal-footer" style="text-align: center;"  ng-show="Manage.found && Manage.findAttempt">
+                <button type="button" class="btn btn-primary mk50" ng-click="Manage.makeDecision('a')">MAKE ADMIN </button>
+                <button type="button" class="btn btn-danger mk50" ng-click="Manage.makeDecision('d')">DELETE </button>
+                <div ng-show="Manage.makeSure" class="sure">
+                    Are you sure? <button class="btn btn-success" ng-click="Manage.doAction()">YES</button><button class="btn btn-danger" ng-click="Manage.makeReset()">NO</button>
+                </div>
+                <div class="alert alert-warning" ng-show="Manage.deleteError || Manage.adminError">
+                    <strong>{{Manage.deleteError ? Manage.deleteErrorText : Manage.adminErrorText}}</strong>
+                </div>
+                <div class="alert alert-success" ng-show="Manage.adminEd">
+                    <strong>ASSOCIATE GRANTED ADMIN ACCESS!</strong>
+                </div>
+                <div class="alert alert-success" ng-show="Manage.deleted">
+                    <strong>ASSOCIATE DELETED!</strong>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="Manage.resetFind()">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+    </div>
+    <div class="jumbotron">
+        <div class="report">
+            <h2>REPORTS <i class="fa fa-file-text" aria-hidden="true"></i></h2>
+            
+            <p>See Associates with...</p>
+            <br>
+            <p><i class="fa fa-quote-left" aria-hidden="true"></i><a href="reports/NDA" target="_blank">NDA Signing Pending.</a></p>
+            <p><i class="fa fa-quote-left" aria-hidden="true"></i><a href="reports/BMS" target="_blank">BMS requests Pending.</a></p>
+            <p><i class="fa fa-quote-left" aria-hidden="true"></i><a href="reports/Drug" target="_blank">Drug Test Pending.</a></p>
+            <p><i class="fa fa-quote-left" aria-hidden="true"></i><a href="reports/Mand" target="_blank">Mandatory Assessments Pending.</a></p>
+            <p><i class="fa fa-quote-left" aria-hidden="true"></i><a href="reports/visa" target="_blank">Valid Visas.</a></p>
+            <p><i class="fa fa-quote-left" aria-hidden="true"></i><a href="reports/proj" target="_blank">Without a projects.</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

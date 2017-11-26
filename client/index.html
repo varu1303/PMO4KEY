@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="PMOapp">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="PMO | KEY">
+    <meta name="author" content="Varun">
+    <base href="/">
+
+    <title>PMO | KEY</title>
+
+    <!---Importing Font ---->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!-- Bootstrap minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- custom stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+    
+  <body  ng-controller="MainController as Main" ng-cloak>
+
+    <nav class="navbar  navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" ng-hide="Main.atLoc('/','/forgotpassword')">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="/">PMO | <i class="fa fa-key" aria-hidden="true"></i></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: Main.atLocClass('/profile')}" ng-hide="Main.atLoc('/','/forgotpassword')"><a href="/profile">{{isName | uppercase}}</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li ng-class="{active: Main.atLocClass('/feed')}" ng-hide="Main.atLoc('/','/forgotpassword') || !isAdmin"><a href="/feed">FEED</a></li>
+<!--            <li ng-class="{active: Main.atLocClass('/reports')}" ng-hide="Main.atLoc('/','/forgotpassword') || !isAdmin"><a href="/reports">REPORTS</a></li>-->
+            <li ng-class="{active: Main.atLocClass('/manage')}" ng-hide="Main.atLoc('/','/forgotpassword') || !isAdmin"><a href="/manage">MANAGE</a></li>
+
+            <li ng-class="{active: Main.atLocClass('/logout')}" ng-hide="Main.atLoc('/','/forgotpassword')"><a href="/logout">LOGOUT</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+      
+
+      
+    <div ng-view class="view-animate"></div>
+  
+
+
+</body>
+</html>
+
+      
+      
+      
+ 
+    <!---Importing Icons ---->
+    <script src="https://use.fontawesome.com/7d3906fbc4.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!---Custom JS file ---->
+    <script src="jQuery/log.js"></script>
+    <!-- Angular CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <!-- Angular route CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <!--Angular Animate -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <!--Custom angular files -->
+    <script src="angular/app-angular.js"></script>
+    <script src="angular/route-angular.js"></script> 
+    <script src="angular/controllers/FeedCtrl.js"></script>
+    <script src="angular/controllers/ProfileCtrl.js"></script>
+    <script src="angular/controllers/LogCtrl.js"></script>
+    <script src="angular/controllers/ReportCtrl.js"></script>
+    <script src="angular/controllers/ManageCtrl.js"></script>
+    <script src="angular/controllers/OutCtrl.js"></script>
+    <script src="angular/controllers/ForgotCtrl.js"></script>
+    <script src="angular/service/httpService.js"></script>
+    <script src="angular/service/tokenService.js"></script>
+    
+  </body>
+</html>
