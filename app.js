@@ -4,6 +4,8 @@ const bodyparser = require('body-parser');
 const path = require('path');
 const db = require('./server/mongo/mongoDb');
 const route = require('./server/routes/userRouter');
+const cron = require('./server/controller/mailScheduler');
+
 
 app.use(express.static('./client'));
 app.use(bodyparser.json());
@@ -14,6 +16,7 @@ route(app);
 app.get('*',function(req,res) {
     res.sendFile(path.join(__dirname + '/client/index.html'));
 });
+
 
     
 db.on('connected',function() {
