@@ -12,7 +12,8 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-cron.schedule('20 20 * * Wed', function(){
+cron.schedule('36 20 * * Wed', function(){
+    console.log('IN-CRON');
     
     User._getDTN()
         .then(function(data){
